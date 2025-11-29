@@ -37,10 +37,9 @@ export function useChatSocket({ conversationId, onMessage, onConversationUpdate,
     if (!enabled) return;
 
     const computeBase = (): string => {
-      // Priority: explicit socket url env, then API BASE_URL import, then window origin
-      // Vite custom env (optional)
+      // Priority: explicit socket url env, then API base env, then axios BASE_URL export
       const viteEnv = (import.meta as any)?.env || {};
-      let base = viteEnv.VITE_SOCKET_URL || viteEnv.VITE_API_BASE || '';
+      let base = viteEnv.VITE_SOCKET_URL || viteEnv.VITE_API_BASE_URL || viteEnv.VITE_API_BASE || '';
       if (!base) base = BASE_URL || '';
       if (base) {
         base = base.replace(/\/$/, '');

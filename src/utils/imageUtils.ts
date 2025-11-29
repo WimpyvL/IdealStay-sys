@@ -5,10 +5,19 @@
 
 // Get the API base URL based on environment
 const getApiBaseUrl = (): string => {
+  const viteEnv = (import.meta as any)?.env || {};
+  const api = viteEnv.VITE_API_BASE_URL || viteEnv.VITE_API_BASE || '';
+  if (api) {
+    return api.replace(/\/$/, '').replace(/\/api(\/v\d+)?($|\/.*)/, '');
+  }
   if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:3001';
   }
-  return 'https://your-cpanel-domain.com';
+  try {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    if (origin) return origin;
+  } catch {}
+  return '';
 };
 
 /**

@@ -7,19 +7,28 @@ import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse, In
 
 // API Configuration Constants
 const API_CONFIG = {
-  // Development - Local backend server
   DEVELOPMENT: 'http://localhost:3001/api/v1',
-  // Production - cPanel backend (update when deployed)
-  PRODUCTION: 'https://your-cpanel-domain.com/api',
-  TIMEOUT: 30000, // 30 seconds
+  TIMEOUT: 30000,
 };
 
-// Get base URL based on environment
+// Get base URL based on environment (Vite-friendly)
 const getBaseURL = (): string => {
+  // Prefer Vite env when available
+  const viteEnv = (import.meta as any)?.env || {};
+  const envBase = viteEnv.VITE_API_BASE_URL || viteEnv.VITE_API_BASE || '';
+  if (envBase) return envBase;
+
+  // Fallback to NODE_ENV heuristic
   if (process.env.NODE_ENV === 'development') {
     return API_CONFIG.DEVELOPMENT;
   }
-  return API_CONFIG.PRODUCTION;
+
+  // Default production assumption: same origin with /api/v1
+  try {
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    if (origin) return `${origin}/api/v1`;
+  } catch {}
+  return '/api/v1';
 };
 
 // API Response Types
