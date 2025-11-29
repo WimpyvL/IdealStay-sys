@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile Image Upload Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .preview { margin: 20px 0; }
+        .preview img { max-width: 200px; max-height: 200px; border-radius: 50%; }
+        .result { margin: 20px 0; padding: 10px; background: #f0f0f0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Profile Image Upload Test</h1>
+    
+    <div>
+        <label for="imageFile">Select Profile Image:</label>
+        <input type="file" id="imageFile" accept="image/*">
+    </div>
+    
+    <div class="preview" id="preview"></div>
+    
+    <button onclick="uploadImage()" id="uploadBtn" disabled>Upload Image</button>
+    
+    <div class="result" id="result"></div>
+
+    <script>
+        let selectedFile = null;
+        const API_BASE = 'http://localhost:3001/api/v1';
+        
+        document.getElementById('imageFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                selectedFile = file;
+                document.getElementById('uploadBtn').disabled = false;
+                
+                // Show preview
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('preview').innerHTML = 
+                        `<img src="${e.target.result}" alt="Preview">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        async function uploadImage() {
+            if (!selectedFile) {
+                document.getElementById('result').innerHTML = 'Please select an image first';
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('image', selectedFile);
+            
+            try {
+                document.getElementById('result').innerHTML = 'Uploading...';
+                
+                // This would need authentication in a real app
+                const response = await fetch(`${API_BASE}/users/profile/image`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        // Authorization header would go here
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('result').innerHTML = 
+                        `✅ Success! Image URL: ${data.data.profile_image_url}`;
+                } else {
+                    document.getElementById('result').innerHTML = 
+                        `❌ Error: ${data.message}`;
+                }
+            } catch (error) {
+                document.getElementById('result').innerHTML = 
+                    `❌ Network Error: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+/* App.css */
+
+.app-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  z-index: 0;
+}
+
+.background-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom right, var(--color-white), var(--color-sky-50), var(--color-blue-100));
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: var(--space-4);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.main-content > * {
+  flex: 1 0 auto;
+  min-height: 0;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding: var(--space-8);
+  }
+}

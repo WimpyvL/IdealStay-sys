@@ -1,0 +1,109 @@
+/* components/Modal.css */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translate(-50%, -60%); opacity: 0; }
+  to { transform: translate(-50%, -50%); opacity: 1; }
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.6); /* slate-900/60 */
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 300ms ease-out;
+}
+
+.modal-content {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95%;
+  max-width: 700px;
+  max-height: 80vh; 
+  background-color: rgb(255, 255, 255);
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: slideIn 300ms ease-out;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+  background: #f8fafc;
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-slate-800);
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--color-slate-400);
+  cursor: pointer;
+  padding: 0;
+  transition: color 200ms;
+}
+.modal-close-button:hover {
+  color: var(--color-slate-800);
+}
+
+.modal-body {
+  color: #475569;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding: 1.5rem;
+}
+
+/* Allow full-bleed variant by adding the class .modal-body--no-padding on the container inside child component */
+.modal-body--no-padding {
+  margin: -1.25rem -1.75rem -1.75rem;
+  padding: 0;
+}
+
+.modal-body p {
+  line-height: 1.6;
+}
+
+.modal__actions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .modal-content {
+    width: 85%;
+    max-width: 800px;
+  }
+  
+  .modal-body {
+    padding: 2rem;
+  }
+  
+  .modal-header {
+    padding: 1.5rem 2rem;
+  }
+}

@@ -1,0 +1,44 @@
+/* components/ViewPropertyModal.css */
+
+.view-property-modal__body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.view-property-modal__loading { text-align: center; padding: var(--space-8) 0; }
+
+.view-property-modal__content { display: flex; flex-direction: column; gap: var(--space-6); }
+
+.vp-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-3);
+}
+.vp-image { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--border-radius-lg); border: 1px solid var(--color-slate-200); background: var(--color-slate-100); }
+
+.vp-meta-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-3); }
+.vp-meta-item { display: flex; flex-direction: column; gap: 2px; background: var(--color-slate-50); padding: var(--space-3); border: 1px solid var(--color-slate-200); border-radius: var(--border-radius-lg); }
+.vp-meta-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-slate-500); }
+.vp-meta-value { font-size: 0.9rem; font-weight: 600; color: var(--color-slate-800); }
+
+.vp-section h4 { margin: 0 0 var(--space-2); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-slate-600); }
+.vp-description { margin: 0; font-size: 0.9rem; line-height: 1.4; color: var(--color-slate-700); white-space: pre-line; }
+
+.vp-amenities { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.vp-amenity-tag { font-size: 0.65rem; font-weight: 600; padding: 4px 8px; background: var(--color-slate-100); border: 1px solid var(--color-slate-200); border-radius: var(--border-radius-full); }
+.vp-amenity-tag--more { background: var(--color-sky-50); border-color: var(--color-sky-300); color: var(--color-sky-700); }
+
+.vp-reviews { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.vp-review-item { background: var(--color-slate-50); padding: var(--space-3); border: 1px solid var(--color-slate-200); border-radius: var(--border-radius-lg); display: flex; flex-direction: column; gap: 4px; }
+.vp-review-rating { font-size: 0.75rem; font-weight: 600; color: var(--color-slate-600); }
+.vp-review-comment { font-size: 0.8rem; color: var(--color-slate-700); }
+
+.vp-footer-actions { display: flex; justify-content: flex-end; }
+
+@media (max-width: 640px) {
+  .view-property-modal__body { padding: var(--space-4); }
+  .vp-images-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+  .vp-meta-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}

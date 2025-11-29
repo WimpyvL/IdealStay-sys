@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "check-connections": "node check-connections.js",
+    "kill-node": "powershell -ExecutionPolicy Bypass -File kill-node-processes.ps1",
+    "test-db": "node check-db-schema.js",
+    "test-profile": "node test-profile-image-size.js",
+    "test-conversations": "node test-conversations-api.js"
+  }
+}

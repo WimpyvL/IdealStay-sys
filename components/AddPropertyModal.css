@@ -1,0 +1,402 @@
+/* components/AddPropertyModal.css */
+
+.add-property-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  /* Provide comfortable interior spacing within the modal (modal-body is full-bleed) */
+  padding: var(--space-6);
+}
+
+@media (max-width: 640px) {
+  .add-property-form {
+    padding: var(--space-4) var(--space-4) var(--space-6);
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-4);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Provide extra top spacing between major stacked full-width groups */
+.form-group.form-span-6 + .form-group.form-span-6 {
+  margin-top: var(--space-4);
+}
+
+/* Removed section-specific margin hacks to maintain consistent vertical alignment */
+
+/* Grid span utilities */
+.form-span-1 { grid-column: span 1; }
+.form-span-2 { grid-column: span 2; }
+.form-span-3 { grid-column: span 3; }
+.form-span-4 { grid-column: span 4; }
+.form-span-6 { grid-column: span 6; }
+
+@media (max-width: 768px) {
+    .form-span-1, .form-span-2, .form-span-3, .form-span-4 {
+        grid-column: span 6;
+    }
+}
+
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-600);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-slate-300);
+  background-color: var(--color-slate-50);
+  font-size: 1rem;
+  color: var(--color-slate-800);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+/* Ensure uniform control heights across different input types (including select & time) */
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="time"],
+.form-group select {
+  height: 42px; /* consistent visual height */
+  line-height: 1.2;
+}
+
+/* Safari/WebKit sometimes reduces select height if line-height mismatches */
+.form-group select {
+  line-height: 1.2;
+}
+
+/* For browsers that ignore explicit height on time inputs, force using min-height */
+.form-group input[type="time"] {
+  min-height: 42px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-sky-500);
+  box-shadow: 0 0 0 3px var(--color-sky-100);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* Amenities grid: keep items compact without huge horizontal gaps */
+.amenities-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--space-3) var(--space-4);
+    align-items: start;
+    padding: var(--space-3) var(--space-3) var(--space-2);
+    background: var(--color-slate-50);
+    border: 1px solid var(--color-slate-200);
+    border-radius: var(--border-radius-lg);
+}
+
+/* Amenity sections wrapper */
+.amenities-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.amenities-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.amenities-section__title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-slate-500);
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .amenities-checkbox-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-2) var(--space-3);
+  }
+}
+@media (max-width: 640px) {
+  .amenities-checkbox-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: var(--space-2) var(--space-2);
+  }
+}
+
+.amenity-checkbox {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: 0.8rem;
+  line-height: 1.2;
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--border-radius-md);
+  background: white;
+  box-shadow: 0 0 0 1px var(--color-slate-200);
+  transition: background 160ms ease, box-shadow 160ms ease;
+}
+
+.amenity-checkbox:hover {
+    background-color: var(--color-slate-50);
+    box-shadow: 0 0 0 1px var(--color-sky-300);
+}
+
+/* Allow long amenity names to wrap more gracefully on very small screens */
+@media (max-width: 480px) {
+  .amenity-checkbox {
+    white-space: normal;
+  }
+}
+
+.amenity-checkbox input {
+    margin-top: 2px;
+    accent-color: var(--color-sky-500);
+    flex-shrink: 0;
+}
+
+/* Refine amenity label text */
+.amenity-checkbox span {
+  font-weight: 500;
+  color: var(--color-slate-700);
+  white-space: nowrap;
+}
+
+/* Wrap gracefully on very narrow widths */
+@media (max-width: 480px) {
+  .amenity-checkbox span { white-space: normal; }
+}
+
+/* File Uploader Styles */
+.file-drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 2px dashed var(--color-slate-300);
+  border-radius: var(--border-radius-xl);
+  background-color: var(--color-slate-50);
+  color: var(--color-slate-500);
+  text-align: center;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+@media (max-width: 640px) {
+  .file-drop-zone {
+    padding: var(--space-4);
+  }
+}
+.file-drop-zone:hover {
+  border-color: var(--color-sky-500);
+  background-color: var(--color-sky-50);
+  color: var(--color-sky-600);
+}
+.file-drop-zone--drag-over {
+  border-color: var(--color-sky-500);
+  background-color: var(--color-sky-100);
+}
+.file-drop-zone svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-slate-400);
+  transition: color 200ms ease;
+}
+.file-drop-zone:hover svg {
+  color: var(--color-sky-500);
+}
+.file-drop-zone p span {
+  font-weight: 600;
+  color: var(--color-sky-500);
+}
+
+/* Image Previews */
+.image-previews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.image-preview-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-slate-200);
+}
+.image-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-preview-remove-btn {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: rgba(15, 23, 42, 0.6);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background-color 200ms ease;
+}
+.image-preview-remove-btn:hover {
+  background-color: rgba(220, 38, 38, 0.8); /* red-600 */
+}
+
+
+.modal__actions button:disabled {
+  background-color: var(--color-slate-300);
+  cursor: not-allowed;
+  transform: none;
+}
+.modal__actions button:disabled:hover {
+  background-color: var(--color-slate-300);
+}
+
+/* Error and Warning Messages */
+.error-message {
+  background-color: #fee;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #fecaca;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.warning-message {
+  background-color: #fffbeb;
+  color: #d97706;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #fed7aa;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Loading Spinner */
+.loading-spinner-small {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Status Toggle */
+.status-toggle-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.status-toggle-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-700);
+}
+
+.status-toggle-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+  .status-toggle-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.status-toggle-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-slate-200);
+  border-radius: var(--border-radius-lg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.status-toggle-option:hover {
+  border-color: var(--color-sky-400);
+  background-color: var(--color-sky-50);
+}
+
+.status-toggle-option--active {
+  border-color: var(--color-sky-600);
+  background-color: var(--color-sky-50);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.status-toggle-option__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.status-toggle-option__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  text-align: left;
+}
+
+.status-toggle-option__text strong {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-slate-900);
+}
+
+.status-toggle-option__text small {
+  font-size: 0.8125rem;
+  color: var(--color-slate-600);
+  line-height: 1.3;
+}
+
+.status-toggle-option--active .status-toggle-option__text strong {
+  color: var(--color-sky-700);
+}

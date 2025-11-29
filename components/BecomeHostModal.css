@@ -1,0 +1,196 @@
+/* components/BecomeHostModal.css */
+
+/* Overriding modal body padding to allow for full-bleed graphic */
+.modal-body {
+    padding: 0 !important;
+}
+
+.auth-modal-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 500px;
+}
+
+.auth-modal__graphic {
+    position: relative;
+    background-image: url('https://picsum.photos/seed/host-bg/800/1000');
+    background-size: cover;
+    background-position: center;
+    padding: var(--space-8);
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.auth-modal__graphic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1));
+}
+
+.auth-modal__graphic-content {
+    position: relative;
+    z-index: 1;
+}
+.auth-modal__graphic h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+}
+.auth-modal__graphic p {
+    font-size: 1rem;
+    color: var(--color-slate-200);
+}
+
+
+.auth-modal__form {
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.auth-modal__form form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.form-subtitle {
+  text-align: center;
+  color: var(--color-slate-500);
+  margin-bottom: var(--space-2);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-600);
+}
+
+.form-group input {
+  width: auto;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-slate-300);
+  background-color: var(--color-slate-50);
+  font-size: 1rem;
+  color: var(--color-slate-800);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-sky-500);
+  box-shadow: 0 0 0 3px var(--color-sky-100);
+}
+
+.form-error {
+  color: #ef4444; /* red-500 */
+  font-size: 0.75rem;
+  margin-top: var(--space-1);
+}
+
+.social-login-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.social-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    width: 100%;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--color-slate-300);
+    background-color: var(--color-white);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-slate-700);
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+.social-login-button:hover {
+    background-color: var(--color-slate-50);
+    border-color: var(--color-slate-400);
+}
+.social-login-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.divider-or {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--color-slate-400);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.divider-or::before,
+.divider-or::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--color-slate-200);
+}
+.divider-or:not(:empty)::before {
+    margin-right: .5em;
+}
+.divider-or:not(:empty)::after {
+    margin-left: .5em;
+}
+
+.button--full-width {
+    width: 100%;
+}
+
+.modal__actions {
+    margin-top: var(--space-2);
+}
+
+
+.form-switch-link {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--color-slate-500);
+  margin-top: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-slate-200);
+}
+
+.form-switch-link button {
+  background: none;
+  border: none;
+  color: var(--color-sky-500);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+.form-switch-link button:hover {
+  text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+    .auth-modal-layout {
+        grid-template-columns: 1fr;
+    }
+    .auth-modal__graphic {
+        display: none;
+    }
+    .auth-modal__form {
+        padding: var(--space-6);
+    }
+    .auth-modal__form form {
+        gap: var(--space-3);
+    }
+}

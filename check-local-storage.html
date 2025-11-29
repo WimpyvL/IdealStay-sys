@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check LocalStorage - Ideal Stay</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #0066cc;
+            padding-bottom: 10px;
+        }
+        .info-block {
+            background: #f9f9f9;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .status {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .status strong {
+            color: #0066cc;
+        }
+        .error {
+            color: #d32f2f;
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success {
+            color: #388e3c;
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        pre {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+        button.danger {
+            background: #d32f2f;
+        }
+        button.danger:hover {
+            background: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Ideal Stay - LocalStorage Checker</h1>
+        <p>This page will help you diagnose authentication and host status issues.</p>
+
+        <div id="output"></div>
+
+        <div style="margin-top: 20px;">
+            <button onclick="checkStorage()">🔄 Refresh Check</button>
+            <button class="danger" onclick="clearStorage()">🗑️ Clear All Storage</button>
+            <button onclick="fixHostStatus()">🔧 Try to Fix Host Status</button>
+        </div>
+    </div>
+
+    <script>
+        function checkStorage() {
+            const output = document.getElementById('output');
+            let html = '';
+
+            // Check for auth token
+            const token = localStorage.getItem('authToken');
+            html += '<div class="info-block">';
+            html += '<h3>🔑 Authentication Token</h3>';
+            if (token) {
+                html += '<div class="success">✅ Token found</div>';
+                html += `<pre>${token.substring(0, 50)}...</pre>`;
+            } else {
+                html += '<div class="error">❌ No token found - You need to log in</div>';
+            }
+            html += '</div>';
+
+            // Check for user data
+            const userStr = localStorage.getItem('user');
+            html += '<div class="info-block">';
+            html += '<h3>👤 User Data</h3>';
+            if (userStr) {
+                try {
+                    const user = JSON.parse(userStr);
+                    html += '<div class="success">✅ User data found</div>';
+                    html += '<div class="status"><strong>Email:</strong> ' + user.email + '</div>';
+                    html += '<div class="status"><strong>Name:</strong> ' + user.first_name + ' ' + user.last_name + '</div>';
+                    html += '<div class="status"><strong>Role:</strong> ' + user.role + '</div>';
+                    html += '<div class="status"><strong>Is Host:</strong> ' + (user.is_host ? '✅ YES' : '❌ NO') + '</div>';
+                    html += '<div class="status"><strong>Host Approved:</strong> ' + (user.host_approved ? '✅ YES' : '❌ NO') + '</div>';
+                    
+                    // Check if all host requirements are met
+                    if (user.role === 'host' && user.is_host && user.host_approved) {
+                        html += '<div class="success" style="margin-top: 15px; font-size: 18px;">';
+                        html += '🎉 <strong>User is properly configured as a host!</strong>';
+                        html += '<br><br>If you\'re still seeing the "Become a Host" page, try:';
+                        html += '<ol style="text-align: left; margin-top: 10px;">';
+                        html += '<li>Hard refresh (Ctrl+Shift+R)</li>';
+                        html += '<li>Clear browser cache</li>';
+                        html += '<li>Log out and log back in</li>';
+                        html += '</ol>';
+                        html += '</div>';
+                    } else {
+                        html += '<div class="error" style="margin-top: 15px;">';
+                        html += '⚠️ <strong>User is NOT properly configured as a host</strong>';
+                        html += '<br>Expected: role="host", is_host=true, host_approved=true';
+                        html += '<br>Click "Try to Fix Host Status" button below to update from server.';
+                        html += '</div>';
+                    }
+                    
+                    html += '<h4 style="margin-top: 20px;">Full User Object:</h4>';
+                    html += '<pre>' + JSON.stringify(user, null, 2) + '</pre>';
+                } catch (e) {
+                    html += '<div class="error">❌ Error parsing user data: ' + e.message + '</div>';
+                    html += '<pre>' + userStr + '</pre>';
+                }
+            } else {
+                html += '<div class="error">❌ No user data found - You need to log in</div>';
+            }
+            html += '</div>';
+
+            output.innerHTML = html;
+        }
+
+        function clearStorage() {
+            if (confirm('Are you sure you want to clear all localStorage? You will need to log in again.')) {
+                localStorage.clear();
+                alert('✅ Storage cleared! Please refresh and log in again.');
+                checkStorage();
+            }
+        }
+
+        async function fixHostStatus() {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                alert('❌ No auth token found. Please log in first.');
+                return;
+            }
+
+            try {
+                // Call the backend to get fresh user profile
+                const response = await fetch('http://localhost:3001/api/v1/users/profile', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch profile: ' + response.status);
+                }
+
+                const result = await response.json();
+                if (result.success && result.data) {
+                    localStorage.setItem('user', JSON.stringify(result.data));
+                    alert('✅ User profile updated from server! Refreshing check...');
+                    checkStorage();
+                } else {
+                    throw new Error(result.message || 'Failed to get user data');
+                }
+            } catch (error) {
+                alert('❌ Error: ' + error.message + '\n\nMake sure the backend server is running.');
+                console.error(error);
+            }
+        }
+
+        // Run check on page load
+        checkStorage();
+    </script>
+</body>
+</html>

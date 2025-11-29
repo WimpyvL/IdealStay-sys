@@ -1,0 +1,122 @@
+/* components/FullscreenImageViewer.css */
+@keyframes viewerFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes viewerZoomIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.fullscreen-viewer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: viewerFadeIn 300ms ease-out;
+}
+
+.viewer-close-button {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  padding: var(--space-3);
+  z-index: 210;
+  transition: all 200ms ease;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+}
+
+.viewer-close-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.viewer-image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--space-16);
+}
+
+.viewer-image {
+  /* Reduced size to make the fullscreen image a bit smaller */
+  max-width: 75vw;
+  max-height: 70vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  animation: viewerZoomIn 300ms ease-out;
+}
+
+.viewer-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 205;
+  transition: all 0.2s ease;
+  color: white;
+}
+
+.viewer-arrow:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.viewer-arrow svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.viewer-arrow--left {
+  left: var(--space-4);
+}
+
+.viewer-arrow--right {
+  right: var(--space-4);
+}
+
+.viewer-counter {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--border-radius-full);
+  font-size: 0.875rem;
+  z-index: 205;
+}

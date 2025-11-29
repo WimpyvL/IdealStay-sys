@@ -1,0 +1,65 @@
+
+/* components/ReviewModal.css */
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-2) 0;
+}
+
+.review-form__property-title {
+  font-size: 1.125rem;
+  color: var(--color-slate-700);
+  text-align: center;
+  margin-bottom: var(--space-4);
+  line-height: 1.5;
+}
+
+.review-form__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-600);
+  margin-bottom: var(--space-2);
+  display: block;
+}
+
+.review-form__rating-section,
+.review-form__text-section {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.review-form__rating-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.review-form__textarea {
+  width: 100%;
+  padding: var(--space-4);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--color-slate-300);
+  background-color: var(--color-slate-50);
+  font-size: 1rem;
+  color: var(--color-slate-800);
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.review-form__textarea:focus {
+  outline: none;
+  border-color: var(--color-sky-500);
+  box-shadow: 0 0 0 3px var(--color-sky-100);
+}
+
+/* Inherits .modal__actions styles from Modal.css */
+.review-form .modal__actions {
+  margin-top: var(--space-8);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-slate-200);
+}

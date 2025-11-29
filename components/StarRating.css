@@ -1,0 +1,34 @@
+
+/* components/StarRating.css */
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.star-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.star-icon {
+  width: 2.5rem; /* w-10 */
+  height: 2.5rem; /* h-10 */
+  transition: color 200ms ease, transform 150ms ease;
+}
+
+.star-button--off .star-icon {
+  color: var(--color-slate-300);
+}
+
+.star-button--on .star-icon {
+  color: var(--color-yellow-400);
+}
+
+.star-button:hover .star-icon {
+  transform: scale(1.15);
+}

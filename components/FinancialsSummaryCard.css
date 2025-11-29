@@ -1,0 +1,176 @@
+.financials-summary-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-6);
+  border-radius: var(--border-radius-3xl);
+  border: 1px solid rgba(226, 232, 240, 0.6);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.65));
+  box-shadow: 0 8px 16px -8px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(24px);
+  transform: translateY(0);
+  transition: all 200ms ease;
+  overflow: hidden;
+}
+
+.financials-summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.4), transparent 70%);
+  transition: opacity 200ms ease;
+  pointer-events: none;
+}
+
+.financials-summary-card:hover,
+.financials-summary-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -12px rgba(15, 23, 42, 0.15);
+  border-color: rgba(226, 232, 240, 0.8);
+}
+
+.financials-summary-card:hover::before {
+  opacity: 1;
+}
+
+.financials-summary-card__icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  color: var(--color-white);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.2);
+}
+
+.financials-summary-card__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.financials-summary-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+  overflow: hidden;
+}
+
+.financials-summary-card__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-slate-500);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.financials-summary-card__value {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  color: var(--color-slate-900);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.financials-summary-card__hint {
+  font-size: 0.875rem;
+  color: var(--color-slate-600);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.financials-summary-card--mint {
+  background: linear-gradient(135deg, rgba(167, 243, 208, 0.25), rgba(255, 255, 255, 0.85));
+  border-color: rgba(167, 243, 208, 0.4);
+}
+
+.financials-summary-card--mint .financials-summary-card__icon {
+  background: linear-gradient(135deg, #34d399, #10b981);
+}
+
+.financials-summary-card--amber {
+  background: linear-gradient(135deg, rgba(253, 224, 71, 0.25), rgba(255, 255, 255, 0.85));
+  border-color: rgba(253, 224, 71, 0.4);
+}
+
+.financials-summary-card--amber .financials-summary-card__icon {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.financials-summary-card--ocean {
+  background: linear-gradient(135deg, rgba(147, 197, 253, 0.25), rgba(255, 255, 255, 0.85));
+  border-color: rgba(147, 197, 253, 0.4);
+}
+
+.financials-summary-card--ocean .financials-summary-card__icon {
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+}
+
+.financials-summary-card--violet {
+  background: linear-gradient(135deg, rgba(196, 181, 253, 0.25), rgba(255, 255, 255, 0.85));
+  border-color: rgba(196, 181, 253, 0.4);
+}
+
+.financials-summary-card--violet .financials-summary-card__icon {
+  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+}
+
+.financials-summary-card--slate {
+  background: linear-gradient(135deg, rgba(148, 163, 184, 0.25), rgba(255, 255, 255, 0.85));
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.financials-summary-card--slate .financials-summary-card__icon {
+  background: linear-gradient(135deg, #64748b, #475569);
+}
+
+@media (max-width: 640px) {
+  .financials-summary-card {
+    grid-template-columns: auto 1fr;
+    text-align: left;
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .financials-summary-card__icon {
+    width: 56px;
+    height: 56px;
+    margin: 0;
+  }
+
+  .financials-summary-card__icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .financials-summary-card__value {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+
+  .financials-summary-card__label {
+    font-size: 0.75rem;
+  }
+
+  .financials-summary-card__hint {
+    font-size: 0.8rem;
+  }
+}
+  

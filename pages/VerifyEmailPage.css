@@ -1,0 +1,16 @@
+.verify-email { display:flex; align-items:center; justify-content:center; min-height:60vh; padding:2rem; }
+.verify-email__card { background:rgba(255,255,255,0.08); backdrop-filter:blur(18px) saturate(160%); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:2.5rem 2rem; max-width:540px; width:100%; color:#fff; box-shadow:0 10px 30px -10px rgba(0,0,0,0.4); }
+.verify-email__card h1 { font-size:1.9rem; margin:0 0 1rem; font-weight:600; letter-spacing:0.5px; }
+.verify-email__status { font-size:1rem; margin:0 0 1.25rem; line-height:1.5; }
+.verify-email__status--success { color:#4ade80; }
+.verify-email__status--error { color:#f87171; }
+.verify-email__status--pending { color:#93c5fd; }
+.verify-email__resend { margin-top:1.5rem; }
+.verify-email__resend h2 { font-size:1.1rem; margin:0 0 .75rem; font-weight:500; }
+.verify-email__resend-form { display:flex; flex-direction:column; gap:.75rem; }
+.verify-email__resend-form input { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:10px; padding:.75rem 1rem; color:#fff; font-size:.95rem; }
+.verify-email__resend-form input:focus { outline:2px solid rgba(255,255,255,0.35); outline-offset:2px; }
+.verify-email__resend-message { margin-top:.5rem; font-size:.85rem; }
+.verify-email__resend-message--sent { color:#4ade80; }
+.verify-email__resend-message--error { color:#f87171; }
+@media (max-width:600px){ .verify-email__card{ padding:2rem 1.5rem; } }

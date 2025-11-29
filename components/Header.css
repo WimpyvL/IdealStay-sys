@@ -1,0 +1,186 @@
+/* components/Header.css */
+
+.header {
+  position: sticky;
+  top: var(--space-4);
+  z-index: 50;
+  margin: 0 auto;
+  width: 95%;
+  max-width: 80rem; /* max-w-7xl */
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3);
+  background-color: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border-color);
+  border-radius: var(--border-radius-2xl);
+  box-shadow: var(--glass-shadow), 0 0 0 1px rgba(0,0,0,0.05);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.header__logo-icon {
+  width: 2rem; /* w-8 */
+  height: 2rem; /* h-8 */
+  color: var(--color-sky-500);
+}
+
+.header__logo-text {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700;
+  letter-spacing: 0.05em; /* tracking-wider */
+  color: var(--color-slate-800);
+}
+
+.header__nav {
+  display: none;
+  align-items: center;
+  background-color: rgba(241, 245, 249, 0.7); /* slate-100/70 */
+  border-radius: var(--border-radius-full);
+  padding: var(--space-1);
+}
+
+@media (min-width: 768px) {
+  .header__nav {
+    display: flex;
+  }
+}
+
+.nav-link {
+  position: relative;
+  padding: var(--space-2) var(--space-3);
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500;
+  color: var(--color-slate-500);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 300ms ease;
+}
+
+.nav-link:hover {
+  color: var(--color-slate-900);
+}
+
+.nav-link--active {
+  color: var(--color-slate-900);
+}
+
+.nav-link__indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1rem; /* w-4 */
+  height: 2px;
+  background-color: var(--color-sky-500);
+  border-radius: var(--border-radius-full);
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.button {
+  padding: var(--space-2) var(--space-4);
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600;
+  border-radius: var(--border-radius-full);
+  border: none;
+  cursor: pointer;
+  transition: all 300ms ease;
+  white-space: nowrap;
+}
+
+.button--secondary {
+  display: none;
+  color: var(--color-slate-700);
+  background-color: rgba(241, 245, 249, 0.7); /* slate-100/70 */
+  border: 1px solid var(--glass-border-color);
+}
+.button--secondary:hover {
+    background-color: rgba(226, 232, 240, 0.9); /* slate-200/90 */
+}
+@media (min-width: 640px) {
+    .button--secondary {
+        display: block;
+    }
+}
+
+.button--primary {
+  color: var(--color-white);
+  background-color: var(--color-sky-500);
+  box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2), 0 2px 4px -2px rgba(14, 165, 233, 0.2);
+}
+.button--primary:hover {
+  background-color: var(--color-sky-600);
+  transform: scale(1.05);
+}
+
+.button--danger {
+  color: var(--color-white);
+  background-color: #ef4444; /* red-500 */
+}
+.button--danger:hover {
+  background-color: #dc2626; /* red-600 */
+  transform: scale(1.05);
+}
+
+.user-profile {
+  display: none;
+  align-items: center;
+  gap: var(--space-3);
+  background-color: rgba(241, 245, 249, 0.7);
+  border: 1px solid var(--glass-border-color);
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
+  border-radius: var(--border-radius-full);
+}
+@media (min-width: 640px) {
+    .user-profile {
+        display: flex;
+    }
+}
+
+
+.user-profile__avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-profile__name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-slate-700);
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgba(241, 245, 249, 0.7);
+  border: 1px solid var(--glass-border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 200ms ease;
+  color: var(--color-slate-600);
+}
+
+.icon-button:hover {
+  background-color: rgba(226, 232, 240, 0.9);
+  color: var(--color-slate-900);
+  transform: scale(1.05);
+}
