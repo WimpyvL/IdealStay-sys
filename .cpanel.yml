@@ -13,5 +13,6 @@ deployment:
     - npx tsc
     - npx tsc-alias
     - mkdir -p "$APPROOT/backend/uploads"
+    - mkdir -p "$APPROOT/backend/tmp" && touch "$APPROOT/backend/tmp/restart.txt"
     - if [ ! -f "$DEPLOYPATH/.htaccess" ]; then cp "$APPROOT/public/.htaccess" "$DEPLOYPATH/.htaccess"; fi
     
