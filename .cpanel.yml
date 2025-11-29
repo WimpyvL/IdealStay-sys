@@ -6,10 +6,12 @@ deployment:
     - cd "$APPROOT"
     - npm ci
     - npm run build
-    - /bin/rsync -a --delete "$APPROOT/dist/" "$DEPLOYPATH/"
+    - /bin/rm -rf "$DEPLOYPATH/assets" "$DEPLOYPATH/index.html"
+    - /bin/cp -R "$APPROOT/dist/"* "$DEPLOYPATH/"
     - cd "$APPROOT/backend"
     - npm ci
     - npx tsc
     - npx tsc-alias
     - mkdir -p "$APPROOT/backend/uploads"
     - if [ ! -f "$DEPLOYPATH/.htaccess" ]; then cp "$APPROOT/public/.htaccess" "$DEPLOYPATH/.htaccess"; fi
+    
