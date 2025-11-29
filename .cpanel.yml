@@ -2,17 +2,15 @@
 deployment:
   tasks:
     - export APPROOT="$(pwd)"
-    - export DEPLOYPATH="$HOME/public_html"
-    - cd "$APPROOT"
-    - npm install
-    - npm run build
-    - /bin/rm -rf "$DEPLOYPATH/assets" "$DEPLOYPATH/index.html"
-    - /bin/cp -R "$APPROOT/dist/"* "$DEPLOYPATH/"
+    - export DEPLOYPATH="/home/idealstayco/public_html"
+    - /bin/echo "== Deploy start =="
+    - /bin/ls -la "$APPROOT"
+    - /bin/ls -la "$APPROOT/dist" || true
+    - /bin/mkdir -p "$DEPLOYPATH"
+    - /bin/rm -rf "$DEPLOYPATH/assets" "$DEPLOYPATH/index.html" || true
+    - /bin/cp -R "$APPROOT/dist/"* "$DEPLOYPATH/" || true
     - cd "$APPROOT/backend"
-    - npm install --production=false
-    - ./node_modules/.bin/tsc
-    - ./node_modules/.bin/tsc-alias
-    - mkdir -p "$APPROOT/backend/uploads"
-    - mkdir -p "$APPROOT/backend/tmp" && touch "$APPROOT/backend/tmp/restart.txt"
-    - if [ ! -f "$DEPLOYPATH/.htaccess" ]; then cp "$APPROOT/public/.htaccess" "$DEPLOYPATH/.htaccess"; fi
+    - /bin/mkdir -p "$APPROOT/backend/uploads"
+    - /bin/mkdir -p "$APPROOT/backend/tmp" && touch "$APPROOT/backend/tmp/restart.txt"
+    - /bin/echo "== Deploy end =="
     
