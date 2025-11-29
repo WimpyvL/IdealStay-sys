@@ -1,0 +1,15 @@
+---
+deployment:
+  tasks:
+    - export APPROOT="$(pwd)"
+    - export DEPLOYPATH="$HOME/public_html"
+    - cd "$APPROOT"
+    - npm ci
+    - npm run build
+    - /bin/rsync -a --delete "$APPROOT/dist/" "$DEPLOYPATH/"
+    - cd "$APPROOT/backend"
+    - npm ci
+    - npx tsc
+    - npx tsc-alias
+    - mkdir -p "$APPROOT/backend/uploads"
+    - if [ ! -f "$DEPLOYPATH/.htaccess" ]; then cp "$APPROOT/public/.htaccess" "$DEPLOYPATH/.htaccess"; fi
