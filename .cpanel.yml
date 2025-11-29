@@ -4,14 +4,14 @@ deployment:
     - export APPROOT="$(pwd)"
     - export DEPLOYPATH="$HOME/public_html"
     - cd "$APPROOT"
-    - npm ci
+    - npm install
     - npm run build
     - /bin/rm -rf "$DEPLOYPATH/assets" "$DEPLOYPATH/index.html"
     - /bin/cp -R "$APPROOT/dist/"* "$DEPLOYPATH/"
     - cd "$APPROOT/backend"
-    - npm ci
-    - npx tsc
-    - npx tsc-alias
+    - npm install --production=false
+    - ./node_modules/.bin/tsc
+    - ./node_modules/.bin/tsc-alias
     - mkdir -p "$APPROOT/backend/uploads"
     - mkdir -p "$APPROOT/backend/tmp" && touch "$APPROOT/backend/tmp/restart.txt"
     - if [ ! -f "$DEPLOYPATH/.htaccess" ]; then cp "$APPROOT/public/.htaccess" "$DEPLOYPATH/.htaccess"; fi
