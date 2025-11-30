@@ -8,6 +8,7 @@
     "build": "tsc && tsc-alias",
     "build:prod": "npm run lint && npm run test && npm run build",
     "start": "node dist/server.js",
+    "start:file": "node start.js",
     "start:dev": "tsx src/server.ts",
     "start:prod": "NODE_ENV=production node dist/server.js",
     "setup-db": "tsx src/utils/setup-database.ts",
